@@ -73,13 +73,13 @@ public class AdminTest {
         // @formatter:off
         given()
                 .cookies(adminResponse.getCookies())
-                .body(new Section("Electronic"))
+                .body(new Section("AGD"))
                 .contentType(ContentType.JSON)
                 .post("/api/addSection")
                 .thenReturn();
         given()
                 .cookies(adminResponse.getCookies())
-                .body(new Section("Electronic"))
+                .body(new Section("AGD"))
                 .contentType(ContentType.JSON)
                 .post("/api/addSection")
                 .then()
@@ -91,19 +91,19 @@ public class AdminTest {
         // @formatter:off
         given()
                 .cookies(adminResponse.getCookies())
-                .body(new Section("Electronic"))
+                .body(new Section("AGD"))
                 .contentType(ContentType.JSON)
                 .post("/api/addSection")
                 .thenReturn();
         given()
                 .cookies(adminResponse.getCookies())
-                .body(new Category("Sport","Electronic"))
+                .body(new Category("Sport","AGD"))
                 .contentType(ContentType.JSON)
                 .post("/api/addCategory")
                 .thenReturn();
         given()
                 .cookies(adminResponse.getCookies())
-                .body(new Category("Sport","Electronic"))
+                .body(new Category("Sport","AGD"))
                 .contentType(ContentType.JSON)
                 .post("/api/addCategory")
                 .then()
@@ -117,7 +117,7 @@ public class AdminTest {
         given()
                 .cookies(adminResponse.getCookies())
                 //  .when()
-                .body(new Section("Electronic"))
+                .body(new Section("AGD"))
                 .contentType(ContentType.JSON)
                 .post("/api/addSection")
                 .thenReturn();
@@ -126,7 +126,7 @@ public class AdminTest {
                 .cookies(adminResponse.getCookies())
                 .body(new Section("Health"))
                 .contentType(ContentType.JSON)
-                .put("/api/updateSection/Electronic")
+                .put("/api/updateSection/AGD")
                 .then()
                 .statusCode(200);
         // @formatter:on
@@ -137,21 +137,21 @@ public class AdminTest {
         // @formatter:off
         given()
                 .cookies(adminResponse.getCookies())
-                .body(new Section("Electronic"))
+                .body(new Section("AGD"))
                 .contentType(ContentType.JSON)
                 .post("/api/addSection")
                 .thenReturn();
         given()
                 .cookies(adminResponse.getCookies())
                 //  .when()
-                .body(new Category("Sport","Electronic"))
+                .body(new Category("Sport","AGD"))
                 .contentType(ContentType.JSON)
                 .post("/api/addCategory")
                 .thenReturn();
         given()
                 .cookies(adminResponse.getCookies())
                 //.when()
-                .body(new Category("Tv","Electronic"))
+                .body(new Category("Tv","AGD"))
                 .contentType(ContentType.JSON)
                 .put("/api/updateCategory/Sport")
                 .then()

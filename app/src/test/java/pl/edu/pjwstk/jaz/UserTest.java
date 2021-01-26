@@ -16,7 +16,7 @@ import static io.restassured.RestAssured.given;
 
 @RunWith(SpringRunner.class)
 @IntegrationTest
-public class AllezoneTestUser {
+public class UserTest {
 
     private static Response adminResponse;
     private static Response userResponse;
@@ -59,9 +59,9 @@ public class AllezoneTestUser {
         photoList.add(new Photo("link3",3));
 
         List<Parameter> parameterList = new ArrayList<>();
-        parameterList.add(new Parameter("Szerokosc","187cm"));
-        parameterList.add(new Parameter("Wysokosc","98cm"));
-        parameterList.add(new Parameter("dlugosc","121cm"));
+        parameterList.add(new Parameter("Szerokosc","189cm"));
+        parameterList.add(new Parameter("Wysokosc","100cm"));
+        parameterList.add(new Parameter("dlugosc","131cm"));
 
         // @formatter:off
         given()
@@ -78,9 +78,9 @@ public class AllezoneTestUser {
                 .thenReturn();
         given()
                 .cookies(userResponse.getCookies())
-                .body(new Auction(1843,
-                        "Kanapa lekko używana",
-                        "Na sprzedaż kanapa taka jak na zdjęciach",
+                .body(new Auction(2453,
+                        "Uzywana kanapa",
+                        "Roczna kanapa rzadko uzywana",
                         "Furniture",
                         photoList,
                         parameterList
@@ -101,9 +101,9 @@ public class AllezoneTestUser {
         photoList.add(new Photo("link3",3));
 
         List<Parameter> parameterList = new ArrayList<>();
-        parameterList.add(new Parameter("Szerokosc","187cm"));
-        parameterList.add(new Parameter("Wysokosc","98cm"));
-        parameterList.add(new Parameter("dlugosc","121cm"));
+        parameterList.add(new Parameter("Szerokosc","189cm"));
+        parameterList.add(new Parameter("Wysokosc","100cm"));
+        parameterList.add(new Parameter("dlugosc","131cm"));
 
         // @formatter:off
         // @formatter:off
@@ -121,9 +121,9 @@ public class AllezoneTestUser {
                 .thenReturn();
         given()
                 .cookies(userResponse.getCookies())
-                .body(new Auction(1843,
-                        "Kanapa lekko używana",
-                        "Na sprzedaż kanapa taka jak na zdjęciach",
+                .body(new Auction(2453,
+                        "Uzywana kanapa",
+                        "Roczna kanapa rzadko uzywana",
                         "Furniture",
                         photoList,
                         parameterList
@@ -134,7 +134,65 @@ public class AllezoneTestUser {
         given()
                 .cookies(userResponse.getCookies())
                 .body(new Auction(0,
-                        "Kanapa lekko uzywana. Zakupiona Rok temu.",
+                        "Uzywana kanapa. Kupiona Rok temu.",
+                        null,
+                        null,
+                        null,
+                        1L,
+                        null,
+                        null
+                ))
+                .contentType(ContentType.JSON)
+                .put("/api/editAuction/5")
+                .then()
+                .statusCode(200);
+
+        // @formatter:on
+    }
+
+    @Test
+    public void editAuctionPriceShouldResponseStatus200() {
+
+        List<Photo> photoList = new ArrayList<>();
+        photoList.add(new Photo("link1",1));
+        photoList.add(new Photo("link2",2));
+        photoList.add(new Photo("link3",3));
+
+        List<Parameter> parameterList = new ArrayList<>();
+        parameterList.add(new Parameter("Szerokosc","189cm"));
+        parameterList.add(new Parameter("Wysokosc","100cm"));
+        parameterList.add(new Parameter("dlugosc","131cm"));
+
+        // @formatter:off
+        // @formatter:off
+        given()
+                .cookies(adminResponse.getCookies())
+                .body(new Section("Home"))
+                .contentType(ContentType.JSON)
+                .post("/api/addSection")
+                .thenReturn();
+        given()
+                .cookies(adminResponse.getCookies())
+                .body(new Category("Furniture","Home"))
+                .contentType(ContentType.JSON)
+                .post("/api/addCategory")
+                .thenReturn();
+        given()
+                .cookies(userResponse.getCookies())
+                .body(new Auction(2453,
+                        "Uzywana kanapa",
+                        "Roczna kanapa rzadko uzywana",
+                        "Furniture",
+                        photoList,
+                        parameterList
+                ))
+                .contentType(ContentType.JSON)
+                .post("/api/addAuction")
+                .thenReturn();
+        given()
+                .cookies(userResponse.getCookies())
+                .body(new Auction(2154,
+                        "Uzywana kanapa. Kupiona Rok temu.",
                         null,
                         null,
                         null,
